@@ -20,7 +20,7 @@
             color: white;
             overflow-x: hidden;
             opacity: 0;
-            animation: fadeIn 1s forwards; /* Initial fade-in effect */
+            animation: fadeIn 1s forwards;
         }
 
         /* Background with scattered orange dots */
@@ -75,16 +75,11 @@
             }
         }
 
-        /* Class for elements that will fade in */
         .scroll-section {
             opacity: 0;
             transform: translateY(100px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .scroll-section.visible {
-            opacity: 1;
-            transform: translateY(0);
+            animation: scrollAnimation 1s ease-out forwards;
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
         h1 {
@@ -142,7 +137,6 @@
     <div class="background" onclick="createBlastEffect(event)"></div>
 
     <div class="content">
-        <!-- Fade-In Elements -->
         <h1 class="scroll-section">Sonoma: The Ultimate Windows to macOS Experience</h1>
         <p class="scroll-section">Transform your Windows into a sleek, modern macOS Big Sur experience. Sonoma is a powerful tool that allows you to customize your Windows environment to look and feel like macOS Big Sur. Whether you're debugging or building from source, Sonoma offers a seamless experience.</p>
 
@@ -211,31 +205,17 @@
             setTimeout(() => circle.remove(), 1500);
         }
 
-        // Function to check if the element is in the viewport
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
-        }
-
         // Scroll reveal animation
         const sections = document.querySelectorAll('.scroll-section');
-
         window.addEventListener('scroll', () => {
             sections.forEach(section => {
-                if (isInViewport(section)) {
+                if (section.getBoundingClientRect().top <= window.innerHeight && !section.classList.contains('visible')) {
                     section.classList.add('visible');
+                    section.style.opacity = 1;
+                    section.style.transform = 'translateY(0)';
                 }
             });
         });
-
-        // Initial page load fade-in for all visible elements
-        window.onload = () => {
-            sections.forEach(section => {
-                if (isInViewport(section)) {
-                    section.classList.add('visible');
-                }
-            });
-        };
     </script>
 </body>
 </html>
