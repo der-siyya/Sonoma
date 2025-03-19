@@ -19,7 +19,7 @@
             background-color: black;
             color: white;
             overflow-x: hidden;
-            opacity: 0; /* Start the fade-in effect from invisible */
+            opacity: 0;
             animation: fadeIn 1s forwards;
         }
 
@@ -48,7 +48,7 @@
 
         @keyframes blastEffect {
             to {
-                transform: scale(20);
+                transform: scale(0.2);
                 opacity: 0;
             }
         }
@@ -66,7 +66,7 @@
         /* Scroll Animation */
         @keyframes scrollAnimation {
             0% {
-                transform: translateY(50px);
+                transform: translateY(100px);
                 opacity: 0;
             }
             100% {
@@ -75,15 +75,11 @@
             }
         }
 
-        .fade-in {
+        .scroll-section {
             opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        h1, h2, p, ul {
-            opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(100px);
             animation: scrollAnimation 1s ease-out forwards;
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
         h1 {
@@ -139,7 +135,7 @@
 
         .scroll-section {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(100px);
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
     </style>
@@ -210,7 +206,7 @@
             document.body.appendChild(circle);
 
             // Position the circle where the click occurred
-            const size = Math.max(window.innerWidth, window.innerHeight);
+            const size = Math.min(window.innerWidth, window.innerHeight) * 0.2; // Smaller size for the circle
             const x = event.clientX - size / 2;
             const y = event.clientY - size / 2;
             circle.style.left = `${x}px`;
