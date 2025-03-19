@@ -20,7 +20,7 @@
             color: white;
             overflow-x: hidden;
             opacity: 0;
-            animation: fadeIn 1s forwards;
+            animation: fadeIn 1s forwards; /* Initial fade-in effect */
         }
 
         /* Background with scattered orange dots */
@@ -75,6 +75,7 @@
             }
         }
 
+        /* Class for elements that will fade in */
         .scroll-section {
             opacity: 0;
             transform: translateY(100px);
@@ -141,6 +142,7 @@
     <div class="background" onclick="createBlastEffect(event)"></div>
 
     <div class="content">
+        <!-- Fade-In Elements -->
         <h1 class="scroll-section">Sonoma: The Ultimate Windows to macOS Experience</h1>
         <p class="scroll-section">Transform your Windows into a sleek, modern macOS Big Sur experience. Sonoma is a powerful tool that allows you to customize your Windows environment to look and feel like macOS Big Sur. Whether you're debugging or building from source, Sonoma offers a seamless experience.</p>
 
@@ -218,6 +220,16 @@
                 }
             });
         });
+
+        // Initial page load fade-in for all visible elements
+        window.onload = () => {
+            const initialSections = document.querySelectorAll('.scroll-section');
+            initialSections.forEach(section => {
+                if (section.getBoundingClientRect().top <= window.innerHeight) {
+                    section.classList.add('visible');
+                }
+            });
+        }
     </script>
 </body>
 </html>
