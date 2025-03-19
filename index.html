@@ -4,18 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonoma Download Page</title>
-    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            height: 100%;
+            background-color: black;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Background with scattered orange dots */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.2) 1px, transparent 1px);
+            background-size: 10px 10px;
+            z-index: -1;
+        }
+
+        /* Content Section */
+        .content {
+            position: relative;
+            padding: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* Scroll Animation */
+        @keyframes scrollAnimation {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1, h2, p, ul {
+            animation: scrollAnimation 1s ease-in-out forwards;
+        }
+
+        /* Button Styles */
+        .download-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background: linear-gradient(45deg, #000, #FFA500);
+            color: white;
+            border: 2px solid #FFA500;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .download-button:hover {
+            background: linear-gradient(45deg, #FFA500, #000);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
+        }
+
+        /* Body and Scrollbar */
+        body {
+            height: 100vh;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="background"></div>
     <div class="content">
-        <h1>Sonoma</h1>
-        <p>Transform your Windows into a sleek, modern macOS Big Sur experience. Sonoma is a powerful tool that allows you to customize your Windows environment to look and feel like macOS Big Sur. Whether you're debugging or building from source, Sonoma offers a seamless experience.</p>
-        <p>With Sonoma, you can enjoy the best of both worlds: the robustness of Windows and the elegance of macOS. Dive into the details below to learn more about what Sonoma has to offer.</p>
+        <h1 class="fade-in">Sonoma</h1>
+        <p class="fade-in">Transform your Windows into a sleek, modern macOS Big Sur experience. Sonoma is a powerful tool that allows you to customize your Windows environment to look and feel like macOS Big Sur. Whether you're debugging or building from source, Sonoma offers a seamless experience.</p>
+        <p class="fade-in">With Sonoma, you can enjoy the best of both worlds: the robustness of Windows and the elegance of macOS. Dive into the details below to learn more about what Sonoma has to offer.</p>
         
-        <h2>Features</h2>
-        <ul>
+        <h2 class="fade-in">Features</h2>
+        <ul class="fade-in">
             <li><strong>macOS Big Sur-like UI:</strong> Experience the sleek and modern design of macOS Big Sur on your Windows machine.</li>
             <li><strong>Customizable Themes:</strong> Choose from a variety of themes to personalize your experience.</li>
             <li><strong>Debugging Tools:</strong> Built-in tools for debugging and troubleshooting.</li>
@@ -23,27 +118,27 @@
             <li><strong>Regular Updates:</strong> Stay up-to-date with the latest features and improvements.</li>
         </ul>
 
-        <h2>How to Install</h2>
-        <p>Follow these steps to install Sonoma on your Windows machine:</p>
-        <ol>
+        <h2 class="fade-in">How to Install</h2>
+        <p class="fade-in">Follow these steps to install Sonoma on your Windows machine:</p>
+        <ol class="fade-in">
             <li><strong>Download the zip:</strong> Click the download button below to get the latest version of Sonoma.</li>
-            <li><strong>build the zip:</strong> Open the downloaded file and begin building with youtube tutorials or etc .</li>
+            <li><strong>build the zip:</strong> Open the downloaded file and begin building with youtube tutorials or etc.</li>
             <li><strong>Restart Your Computer:</strong> After installation, restart your computer to apply the changes.</li>
             <li><strong>Enjoy Sonoma:</strong> Experience the macOS Big Sur-like interface on your Windows machine.</li>
         </ol>
 
-        <h2>Why Choose Sonoma?</h2>
-        <p>Sonoma is more than just a theme; it's a complete transformation of your Windows environment. Here are some reasons why you should choose Sonoma:</p>
-        <ul>
+        <h2 class="fade-in">Why Choose Sonoma?</h2>
+        <p class="fade-in">Sonoma is more than just a theme; it's a complete transformation of your Windows environment. Here are some reasons why you should choose Sonoma:</p>
+        <ul class="fade-in">
             <li><strong>User-Friendly:</strong> Easy to install and use, even for beginners.</li>
             <li><strong>Lightweight:</strong> Sonoma is designed to be lightweight and efficient, ensuring minimal impact on system performance.</li>
             <li><strong>Community Support:</strong> Join a growing community of users and developers who are passionate about Sonoma.</li>
             <li><strong>Cross-Platform Compatibility:</strong> Sonoma works seamlessly across different versions of Windows.</li>
         </ul>
 
-        <h2>System Requirements</h2>
-        <p>Before downloading Sonoma, ensure your system meets the following requirements:</p>
-        <ul>
+        <h2 class="fade-in">System Requirements</h2>
+        <p class="fade-in">Before downloading Sonoma, ensure your system meets the following requirements:</p>
+        <ul class="fade-in">
             <li><strong>Operating System:</strong> Windows 10 or later.</li>
             <li><strong>RAM:</strong> At least 4GB of memory.</li>
             <li><strong>Storage:</strong> 500MB of free disk space.</li>
@@ -52,6 +147,5 @@
 
         <a href="Sonoma.zip" class="download-button">Download Sonoma</a>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
