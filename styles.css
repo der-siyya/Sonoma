@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #1a1a1a 10%, #000 100%);
+    z-index: -1;
+}
+
+.content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+p, ul, ol {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+ul, ol {
+    padding-left: 40px;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #fff;
+    background: linear-gradient(135deg, #000, #1a1a1a);
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.download-button:hover {
+    background: linear-gradient(135deg, #1a1a1a, #000);
+    transform: scale(1.05);
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(10);
+        opacity: 0;
+    }
+}
+
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple 1.5s linear;
+    pointer-events: none;
+}
