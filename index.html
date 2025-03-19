@@ -144,7 +144,7 @@
 
         .terms-panel .panel-content {
             background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             border: 2px solid orange;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
@@ -152,14 +152,14 @@
             width: 80%;
             max-width: 500px;
             color: white;
-            font-size: 1.5em;
+            font-size: 1.2em;
             opacity: 0.95;
         }
 
         .terms-panel .panel-content button {
-            padding: 15px 30px;
-            margin-top: 20px;
-            font-size: 1.5em;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 1.2em;
             font-weight: bold;
             text-align: center;
             text-decoration: none;
@@ -205,7 +205,49 @@
         <h1 class="scroll-section">Sonoma: The Ultimate Windows to macOS Experience</h1>
         <p class="scroll-section">Transform your Windows into a sleek, modern macOS Big Sur experience. Sonoma is a powerful tool that allows you to customize your Windows environment to look and feel like macOS Big Sur. Whether you're debugging or building from source, Sonoma offers a seamless experience.</p>
 
-        <!-- More content sections as previously detailed -->
+        <h2 class="scroll-section">Features</h2>
+        <ul class="scroll-section">
+            <li><strong>macOS Big Sur-like UI:</strong> Experience the sleek and modern design of macOS Big Sur on your Windows machine.</li>
+            <li><strong>Customizable Themes:</strong> Choose from a variety of themes to personalize your experience.</li>
+            <li><strong>Debugging Tools:</strong> Built-in tools for debugging and troubleshooting.</li>
+            <li><strong>Open-Source:</strong> Sonoma is open-source, allowing you to contribute and customize the code.</li>
+            <li><strong>Regular Updates:</strong> Stay up-to-date with the latest features and improvements.</li>
+        </ul>
+
+        <h2 class="scroll-section">How to Install</h2>
+        <p class="scroll-section">Follow these steps to install Sonoma on your Windows machine:</p>
+        <ol class="scroll-section">
+            <li><strong>Download the zip:</strong> Click the download button below to get the latest version of Sonoma.</li>
+            <li><strong>Build the zip:</strong> Open the downloaded file and follow YouTube tutorials or other resources to build Sonoma from source.</li>
+            <li><strong>Restart Your Computer:</strong> After installation, restart your computer to apply the changes.</li>
+            <li><strong>Enjoy Sonoma:</strong> Experience the macOS Big Sur-like interface on your Windows machine.</li>
+        </ol>
+
+        <h2 class="scroll-section">Why Choose Sonoma?</h2>
+        <p class="scroll-section">Sonoma is more than just a theme; it's a complete transformation of your Windows environment. Here are some reasons why you should choose Sonoma:</p>
+        <ul class="scroll-section">
+            <li><strong>User-Friendly:</strong> Easy to install and use, even for beginners.</li>
+            <li><strong>Lightweight:</strong> Sonoma is designed to be lightweight and efficient, ensuring minimal impact on system performance.</li>
+            <li><strong>Community Support:</strong> Join a growing community of users and developers who are passionate about Sonoma.</li>
+            <li><strong>Cross-Platform Compatibility:</strong> Sonoma works seamlessly across different versions of Windows.</li>
+        </ul>
+
+        <h2 class="scroll-section">System Requirements</h2>
+        <p class="scroll-section">Before downloading Sonoma, ensure your system meets the following requirements:</p>
+        <ul class="scroll-section">
+            <li><strong>Operating System:</strong> Windows 10 or later.</li>
+            <li><strong>RAM:</strong> At least 4GB of memory.</li>
+            <li><strong>Storage:</strong> 500MB of free disk space.</li>
+            <li><strong>Graphics:</strong> A GPU that supports DirectX 10 or later.</li>
+        </ul>
+
+        <h2 class="scroll-section">Advanced Features</h2>
+        <p class="scroll-section">Sonoma not only replicates the aesthetic of macOS but also introduces powerful features that enhance user experience:</p>
+        <ul class="scroll-section">
+            <li><strong>Multi-Monitor Support:</strong> Easily manage and configure multiple monitors like macOS, offering greater flexibility for multitasking.</li>
+            <li><strong>Advanced Search:</strong> An intuitive Spotlight-style search that helps you find files, apps, and system settings with ease.</li>
+            <li><strong>Task Management:</strong> A refined task management system for easier organization of apps and windows.</li>
+        </ul>
 
         <a href="Sonoma.zip" class="download-button">Download Sonoma</a>
     </div>
@@ -251,24 +293,19 @@
         const agreeBtn = document.getElementById('agreeBtn');
         const disagreeBtn = document.getElementById('disagreeBtn');
 
-        // Show the panel and block interactions
-        setTimeout(() => {
+        // Check if terms have been accepted before
+        const hasAgreed = localStorage.getItem('termsAgreed');
+        if (!hasAgreed) {
             termsPanel.classList.add('active');
-            document.body.style.pointerEvents = 'none'; // Disable interaction with page until terms are agreed
-        }, 500);
+        }
 
-        // When clicking "Agree"
         agreeBtn.addEventListener('click', () => {
-            termsPanel.style.opacity = 0;
-            setTimeout(() => {
-                termsPanel.style.display = 'none';
-                document.body.style.pointerEvents = 'auto'; // Enable interaction with the page
-            }, 500);
+            localStorage.setItem('termsAgreed', 'true');
+            termsPanel.classList.remove('active');
         });
 
-        // When clicking "Disagree"
         disagreeBtn.addEventListener('click', () => {
-            alert('You must agree to the terms to proceed.');
+            window.location.href = 'https://www.google.com'; // Redirect if user disagrees
         });
     </script>
 </body>
