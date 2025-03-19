@@ -120,61 +120,6 @@
             box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
         }
 
-        /* Panel for Terms of Agreement */
-        .terms-panel {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: all;
-            z-index: 9999;
-        }
-
-        .terms-panel.active {
-            opacity: 1;
-        }
-
-        .terms-panel .panel-content {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid orange;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            width: 80%;
-            max-width: 500px;
-            color: white;
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
-
-        .terms-panel .panel-content button {
-            padding: 10px 20px;
-            margin-top: 10px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            background: linear-gradient(45deg, #000, #FFA500);
-            color: white;
-            border: 2px solid #FFA500;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .terms-panel .panel-content button:hover {
-            background: linear-gradient(45deg, #FFA500, #000);
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
-        }
-
         /* Body and Scrollbar */
         body {
             height: 100vh;
@@ -190,15 +135,6 @@
 </head>
 <body>
     <div class="background" onclick="createBlastEffect(event)"></div>
-
-    <!-- Terms Panel -->
-    <div class="terms-panel" id="termsPanel">
-        <div class="panel-content">
-            <p>Do you agree to Sonoma's Terms of Modifying PC Elements?</p>
-            <button id="agreeBtn">Agree</button>
-            <button id="disagreeBtn">Disagree</button>
-        </div>
-    </div>
 
     <div class="content">
         <h1 class="scroll-section">Sonoma: The Ultimate Windows to macOS Experience</h1>
@@ -268,26 +204,6 @@
             // Remove the circle after animation
             setTimeout(() => circle.remove(), 1500);
         }
-
-        // Get the terms panel and buttons
-        const termsPanel = document.getElementById('termsPanel');
-        const agreeBtn = document.getElementById('agreeBtn');
-        const disagreeBtn = document.getElementById('disagreeBtn');
-
-        // Show the terms panel on page load
-        window.onload = () => {
-            termsPanel.classList.add('active');
-            document.body.style.pointerEvents = 'none';  // Block page interaction
-        }
-
-        agreeBtn.addEventListener('click', () => {
-            termsPanel.classList.remove('active');
-            document.body.style.pointerEvents = 'auto';  // Enable interaction after agreement
-        });
-
-        disagreeBtn.addEventListener('click', () => {
-            window.location.href = 'https://www.google.com'; // Redirect if user disagrees
-        });
 
         // Scroll reveal animation
         const sections = document.querySelectorAll('.scroll-section');
