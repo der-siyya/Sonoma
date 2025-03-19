@@ -19,6 +19,8 @@
             background-color: black;
             color: white;
             overflow-x: hidden;
+            opacity: 0; /* Start the fade-in effect from invisible */
+            animation: fadeIn 1s forwards;
         }
 
         /* Background with scattered orange dots */
@@ -31,14 +33,24 @@
             background: radial-gradient(circle, rgba(255, 165, 0, 0.2) 1px, transparent 1px);
             background-size: 10px 10px;
             z-index: -1;
+            cursor: pointer;
         }
 
-        /* Content Section */
-        .content {
-            position: relative;
-            padding: 50px;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Circle effect */
+        .blast-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(0, 139, 139, 0.4); /* Dark cyan */
+            transform: scale(0);
+            pointer-events: none;
+            animation: blastEffect 1.5s ease-out forwards;
+        }
+
+        @keyframes blastEffect {
+            to {
+                transform: scale(20);
+                opacity: 0;
+            }
         }
 
         /* Fade-in animation */
@@ -49,12 +61,6 @@
             100% {
                 opacity: 1;
             }
-        }
-
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 0.5s;
         }
 
         /* Scroll Animation */
@@ -69,8 +75,30 @@
             }
         }
 
+        .fade-in {
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+        }
+
         h1, h2, p, ul {
-            animation: scrollAnimation 1s ease-in-out forwards;
+            animation: scrollAnimation 1.5s ease-in-out forwards;
+            font-size: 1.2em; /* Make text bigger */
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        h2 {
+            font-size: 2.5em;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        ul {
+            font-size: 1.5em;
         }
 
         /* Button Styles */
@@ -78,7 +106,7 @@
             display: inline-block;
             padding: 15px 30px;
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 1.5em;
             font-weight: bold;
             text-align: center;
             text-decoration: none;
@@ -103,7 +131,7 @@
     </style>
 </head>
 <body>
-    <div class="background"></div>
+    <div class="background" onclick="createBlastEffect(event)"></div>
     <div class="content">
         <h1 class="fade-in">Sonoma</h1>
         <p class="fade-in">Transform your Windows into a sleek, modern macOS Big Sur experience. Sonoma is a powerful tool that allows you to customize your Windows environment to look and feel like macOS Big Sur. Whether you're debugging or building from source, Sonoma offers a seamless experience.</p>
@@ -122,7 +150,7 @@
         <p class="fade-in">Follow these steps to install Sonoma on your Windows machine:</p>
         <ol class="fade-in">
             <li><strong>Download the zip:</strong> Click the download button below to get the latest version of Sonoma.</li>
-            <li><strong>build the zip:</strong> Open the downloaded file and begin building with youtube tutorials or etc.</li>
+            <li><strong>Build the zip:</strong> Open the downloaded file and begin building with YouTube tutorials or other resources.</li>
             <li><strong>Restart Your Computer:</strong> After installation, restart your computer to apply the changes.</li>
             <li><strong>Enjoy Sonoma:</strong> Experience the macOS Big Sur-like interface on your Windows machine.</li>
         </ol>
@@ -147,5 +175,28 @@
 
         <a href="Sonoma.zip" class="download-button">Download Sonoma</a>
     </div>
+
+    <script>
+        // Create the blast circle effect when clicking on the background
+        function createBlastEffect(event) {
+            const circle = document.createElement('div');
+            circle.classList.add('blast-circle');
+            document.body.appendChild(circle);
+
+            // Position the circle where the click occurred
+            const size = Math.max(window.innerWidth, window.innerHeight);
+            const x = event.clientX - size / 2;
+            const y = event.clientY - size / 2;
+            circle.style.left = `${x}px`;
+            circle.style.top = `${y}px`;
+            circle.style.width = `${size}px`;
+            circle.style.height = `${size}px`;
+
+            // Remove the circle after animation is complete
+            setTimeout(() => {
+                circle.remove();
+            }, 1500);
+        }
+    </script>
 </body>
 </html>
