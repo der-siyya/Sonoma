@@ -258,14 +258,12 @@
             circle.classList.add('blast-circle');
             document.body.appendChild(circle);
 
-            // Position the circle where the click occurred
-            const size = Math.min(window.innerWidth, window.innerHeight) * 0.2; // Smaller size for the circle
-            const x = event.clientX - size / 2;
-            const y = event.clientY - size / 2;
-            circle.style.left = `${x}px`;
-            circle.style.top = `${y}px`;
+            // Position the circle where the click happened
+            const size = Math.random() * 50 + 30; // Random size between 30 and 80px
             circle.style.width = `${size}px`;
             circle.style.height = `${size}px`;
+            circle.style.left = `${event.clientX - size / 2}px`;
+            circle.style.top = `${event.clientY - size / 2}px`;
 
             // Remove the circle after animation
             setTimeout(() => circle.remove(), 1500);
@@ -276,15 +274,13 @@
         const agreeBtn = document.getElementById('agreeBtn');
         const disagreeBtn = document.getElementById('disagreeBtn');
 
-        // Check if terms have been accepted before
-        const hasAgreed = localStorage.getItem('termsAgreed');
-        if (!hasAgreed) {
+        // Show the terms panel on page load
+        window.onload = () => {
             termsPanel.classList.add('active');
             document.body.style.pointerEvents = 'none';  // Block page interaction
         }
 
         agreeBtn.addEventListener('click', () => {
-            localStorage.setItem('termsAgreed', 'true');
             termsPanel.classList.remove('active');
             document.body.style.pointerEvents = 'auto';  // Enable interaction after agreement
         });
