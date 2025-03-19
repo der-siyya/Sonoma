@@ -21,7 +21,6 @@
             overflow-x: hidden;
             opacity: 0;
             animation: fadeIn 1s forwards;
-            pointer-events: none; /* Initially block interaction */
         }
 
         /* Background with scattered orange dots */
@@ -268,27 +267,11 @@
             circle.style.width = `${size}px`;
             circle.style.height = `${size}px`;
 
-            // Remove the circle after animation is complete
-            setTimeout(() => {
-                circle.remove();
-            }, 1500);
+            // Remove the circle after animation
+            setTimeout(() => circle.remove(), 1500);
         }
 
-        // Scroll animation trigger
-        const sections = document.querySelectorAll('.scroll-section');
-        const animateOnScroll = () => {
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top >= 0 && rect.top <= window.innerHeight) {
-                    section.classList.add('fade-in');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll();  // Initial check on page load
-
-        // Terms Panel interaction
+        // Get the terms panel and buttons
         const termsPanel = document.getElementById('termsPanel');
         const agreeBtn = document.getElementById('agreeBtn');
         const disagreeBtn = document.getElementById('disagreeBtn');
@@ -297,11 +280,13 @@
         const hasAgreed = localStorage.getItem('termsAgreed');
         if (!hasAgreed) {
             termsPanel.classList.add('active');
+            document.body.style.pointerEvents = 'none';  // Block page interaction
         }
 
         agreeBtn.addEventListener('click', () => {
             localStorage.setItem('termsAgreed', 'true');
             termsPanel.classList.remove('active');
+            document.body.style.pointerEvents = 'auto';  // Enable interaction after agreement
         });
 
         disagreeBtn.addEventListener('click', () => {
