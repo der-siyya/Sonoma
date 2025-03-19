@@ -1,0 +1,350 @@
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- MacOS-style Taskbar Base Style -->
+    <Style x:Key="MacOSTaskbarStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#CC2B2B2B" Offset="0"/>
+                    <GradientStop Color="#CC1E1E1E" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CornerRadius" Value="16"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="15" Direction="270" ShadowDepth="3" Opacity="0.3"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="20,0,20,10"/>
+        <Setter Property="Height" Value="65"/>
+    </Style>
+
+    <!-- MacOS-style Taskbar Item Container -->
+    <Style x:Key="TaskbarItemContainerStyle" TargetType="ItemsControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ItemsControl">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <ItemsPresenter/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MacOS-style Application Icon Button -->
+    <Style x:Key="AppIconButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="ButtonBorder"
+                                CornerRadius="10"
+                                Background="Transparent">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" Direction="270" ShadowDepth="2" Opacity="0.2"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border x:Name="HoverIndicator"
+                                Height="4"
+                                Width="4"
+                                CornerRadius="2"
+                                Background="#00FFFFFF"
+                                VerticalAlignment="Bottom"
+                                Margin="0,0,0,2"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="#33FFFFFF"/>
+                            <Setter TargetName="HoverIndicator" Property="Background" Value="#FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="#66FFFFFF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MacOS-style Window Preview -->
+    <Style x:Key="WindowPreviewStyle" TargetType="Border">
+        <Setter Property="Background" Value="#CC000000"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="150"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="20" Direction="270" ShadowDepth="5" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MacOS-style Window Controls -->
+    <Style x:Key="WindowControlButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="Margin" Value="4,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse x:Name="ButtonEllipse" Fill="{TemplateBinding Background}"/>
+                        <Path x:Name="ButtonSymbol"
+                              Data="{TemplateBinding Tag}"
+                              Stroke="#66000000"
+                              StrokeThickness="1"
+                              Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonSymbol" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Close Button Style -->
+    <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowControlButtonStyle}">
+        <Setter Property="Background" Value="#FF5F57"/>
+        <Setter Property="Tag" Value="M 3,3 L 9,9 M 3,9 L 9,3"/>
+    </Style>
+
+    <!-- Minimize Button Style -->
+    <Style x:Key="MinimizeButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowControlButtonStyle}">
+        <Setter Property="Background" Value="#FEBC2E"/>
+        <Setter Property="Tag" Value="M 3,6 L 9,6"/>
+    </Style>
+
+    <!-- Maximize Button Style -->
+    <Style x:Key="MaximizeButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowControlButtonStyle}">
+        <Setter Property="Background" Value="#28C940"/>
+        <Setter Property="Tag" Value="M 3,3 L 9,3 L 9,9 L 3,9 Z"/>
+    </Style>
+
+    <!-- MacOS-style Window Title -->
+    <Style x:Key="WindowTitleStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- MacOS-style Dock Magnification Animation -->
+    <Style x:Key="DockMagnificationStyle" TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                           To="65" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                           To="65" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                           To="50" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                           To="50" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- MacOS-style Context Menu -->
+    <Style x:Key="ContextMenuStyle" TargetType="ContextMenu">
+        <Setter Property="Background" Value="#CC2B2B2B"/>
+        <Setter Property="BorderBrush" Value="#444444"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Effect="{StaticResource MacOSDropShadow}">
+                        <ItemsPresenter Margin="2"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MacOS-style Context Menu Item -->
+    <Style x:Key="ContextMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Padding" Value="10,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="4">
+                        <Grid>
+                            <ContentPresenter Content="{TemplateBinding Header}"
+                                            Margin="{TemplateBinding Padding}"
+                                            VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#444444"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MacOS-style Drop Shadow Effect -->
+    <DropShadowEffect x:Key="MacOSDropShadow"
+                      BlurRadius="15"
+                      Direction="270"
+                      ShadowDepth="3"
+                      Opacity="0.3"/>
+
+    <!-- MacOS-style Window Animation -->
+    <Style x:Key="WindowAnimationStyle" TargetType="Window">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Window.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                       From="0" To="1" Duration="0:0:0.3">
+                            <DoubleAnimation.EasingFunction>
+                                <QuadraticEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- MacOS-style Window Minimize Animation -->
+    <Style x:Key="MinimizeAnimationStyle" TargetType="Window">
+        <Style.Triggers>
+            <Trigger Property="WindowState" Value="Minimized">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                           To="0" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                           To="0" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- MacOS-style Taskbar Separator -->
+    <Style x:Key="TaskbarSeparatorStyle" TargetType="Rectangle">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Margin" Value="5,0"/>
+        <Setter Property="Fill" Value="#44FFFFFF"/>
+    </Style>
+
+    <!-- MacOS-style System Tray -->
+    <Style x:Key="SystemTrayStyle" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Margin" Value="10,0"/>
+    </Style>
+
+    <!-- MacOS-style System Tray Icon -->
+    <Style x:Key="SystemTrayIconStyle" TargetType="Image">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Margin" Value="5,0"/>
+        <Setter Property="Opacity" Value="0.8"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- MacOS-style Clock -->
+    <Style x:Key="ClockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- MacOS-style Battery Indicator -->
+    <Style x:Key="BatteryIndicatorStyle" TargetType="Grid">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="14"/>
+        <Setter Property="Margin" Value="5,0"/>
+    </Style>
+
+    <!-- MacOS-style Volume Control -->
+    <Style x:Key="VolumeControlStyle" TargetType="Slider">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Border Background="#33FFFFFF" CornerRadius="3">
+                        <Track x:Name="PART_Track">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Background="#FFFFFF"/>
+                            </Track.DecreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb Width="10" Height="10">
+                                    <Thumb.Template>
+                                        <ControlTemplate>
+                                            <Ellipse Fill="#FFFFFF"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,257 @@
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- MacOS-like Window Style -->
+    <Style x:Key="MacOSWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinWidth" Value="800"/>
+        <Setter Property="MinHeight" Value="600"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border x:Name="WindowBorder" 
+                            BorderThickness="1" 
+                            CornerRadius="10"
+                            Background="{DynamicResource WindowBackgroundBrush}">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" 
+                                            Direction="0" 
+                                            Opacity="0.5" 
+                                            ShadowDepth="0" 
+                                            Color="#FF000000"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Window Title Bar -->
+                            <Grid x:Name="TitleBar" 
+                                  Grid.Row="0" 
+                                  Background="{DynamicResource TitleBarBackgroundBrush}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Window Control Buttons -->
+                                <StackPanel Grid.Column="0" 
+                                          Orientation="Horizontal" 
+                                          Margin="12,0,0,0" 
+                                          VerticalAlignment="Center">
+                                    <Button x:Name="CloseButton" 
+                                            Style="{StaticResource MacOSWindowButtonStyle}"
+                                            Background="#FFFF605C">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Grid>
+                                                    <Ellipse Fill="{TemplateBinding Background}" 
+                                                             Width="12" 
+                                                             Height="12"/>
+                                                    <Path x:Name="CrossPath" 
+                                                          Data="M 3,3 L 9,9 M 3,9 L 9,3" 
+                                                          Stroke="#66000000" 
+                                                          StrokeThickness="1.5" 
+                                                          Visibility="Collapsed"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="CrossPath" Property="Visibility" Value="Visible"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Button x:Name="MinimizeButton" 
+                                            Style="{StaticResource MacOSWindowButtonStyle}"
+                                            Background="#FFFFBD44" 
+                                            Margin="8,0,0,0">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Grid>
+                                                    <Ellipse Fill="{TemplateBinding Background}" 
+                                                             Width="12" 
+                                                             Height="12"/>
+                                                    <Path x:Name="MinPath" 
+                                                          Data="M 3,6 L 9,6" 
+                                                          Stroke="#66000000" 
+                                                          StrokeThickness="1.5" 
+                                                          Visibility="Collapsed"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="MinPath" Property="Visibility" Value="Visible"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                    <Button x:Name="MaximizeButton" 
+                                            Style="{StaticResource MacOSWindowButtonStyle}"
+                                            Background="#FF00CA4E" 
+                                            Margin="8,0,0,0">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Grid>
+                                                    <Ellipse Fill="{TemplateBinding Background}" 
+                                                             Width="12" 
+                                                             Height="12"/>
+                                                    <Path x:Name="MaxPath" 
+                                                          Data="M 3.5,3.5 L 8.5,3.5 L 8.5,8.5 L 3.5,8.5 Z" 
+                                                          Stroke="#66000000" 
+                                                          StrokeThickness="1.5" 
+                                                          Visibility="Collapsed"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="MaxPath" Property="Visibility" Value="Visible"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Window Title -->
+                                <TextBlock Grid.Column="1" 
+                                         Text="{TemplateBinding Title}" 
+                                         FontSize="13" 
+                                         FontWeight="SemiBold"
+                                         Foreground="{DynamicResource WindowTitleBrush}"
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center"/>
+
+                                <!-- Additional Window Controls -->
+                                <StackPanel Grid.Column="2" 
+                                          Orientation="Horizontal" 
+                                          Margin="0,0,12,0">
+                                    <!-- Add additional controls here -->
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Window Content -->
+                            <Border Grid.Row="1" 
+                                    Margin="1,0,1,1" 
+                                    ClipToBounds="True">
+                                <AdornerDecorator>
+                                    <ContentPresenter/>
+                                </AdornerDecorator>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MacOS Window Button Style -->
+    <Style x:Key="MacOSWindowButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+
+    <!-- Theme Resources -->
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF8F8F8"/>
+    <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="#FFF0F0F0"/>
+    <SolidColorBrush x:Key="WindowTitleBrush" Color="#FF333333"/>
+
+    <!-- Window Animation -->
+    <Storyboard x:Key="WindowOpenAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0" To="1" Duration="0:0:0.2"/>
+        <DoubleAnimation Storyboard.TargetProperty="(Window.RenderTransform).(ScaleTransform.ScaleX)"
+                         From="0.95" To="1" Duration="0:0:0.2">
+            <DoubleAnimation.EasingFunction>
+                <CubicEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetProperty="(Window.RenderTransform).(ScaleTransform.ScaleY)"
+                         From="0.95" To="1" Duration="0:0:0.2">
+            <DoubleAnimation.EasingFunction>
+                <CubicEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+    </Storyboard>
+
+    <!-- Custom Window Commands -->
+    <RoutedUICommand x:Key="MinimizeWindowCommand" Text="Minimize"/>
+    <RoutedUICommand x:Key="MaximizeWindowCommand" Text="Maximize"/>
+    <RoutedUICommand x:Key="RestoreWindowCommand" Text="Restore"/>
+    <RoutedUICommand x:Key="CloseWindowCommand" Text="Close"/>
+
+    <!-- Window State Triggers -->
+    <Style x:Key="WindowStateTriggers">
+        <Style.Triggers>
+            <Trigger Property="Window.WindowState" Value="Maximized">
+                <Setter Property="Window.BorderThickness" Value="0"/>
+                <Setter Property="Window.Padding" Value="8"/>
+            </Trigger>
+            <Trigger Property="Window.WindowState" Value="Normal">
+                <Setter Property="Window.BorderThickness" Value="1"/>
+                <Setter Property="Window.Padding" Value="0"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Window Resize Grip -->
+    <Style x:Key="WindowResizeGripStyle" TargetType="{x:Type ResizeGrip}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                    <Border Background="Transparent" 
+                            Width="16" 
+                            Height="16">
+                        <Path Data="M 14,14 L 14,2 L 2,14 Z"
+                              Fill="#20000000"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Window Blur Effect -->
+    <Style x:Key="WindowBlurEffect">
+        <Style.Triggers>
+            <Trigger Property="Window.IsActive" Value="False">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="5"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Window Content Transitions -->
+    <Style x:Key="ContentTransitions">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <ContentPresenter x:Name="CurrentContent"/>
+                        <ContentPresenter x:Name="PreviousContent"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Additional Brushes and Colors -->
+    <LinearGradientBrush x:Key="TitleBarGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FFF8F8F8" Offset="0"/>
+        <GradientStop Color="#FFF0F0F0" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Color x:Key="WindowBorderColor">#FFE0E0E0</Color>
+    <Color x:Key="WindowShadowColor">#40000000</Color>
+    <Color x:Key="WindowHighlightColor">#FFFFFFFF</Color>
+</ResourceDictionary>

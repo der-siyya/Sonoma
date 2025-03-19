@@ -1,0 +1,133 @@
+
+<UserControl x:Class="Eternals.Core.UI.TaskbarSecondaryUtilities"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Eternals.Core.UI"
+             mc:Ignorable="d"
+             d:DesignHeight="40" d:DesignWidth="400">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <!-- Audio Control -->
+            <Button x:Name="AudioButton" Width="40" Height="40" Margin="2,0">
+                <StackPanel>
+                    <Image Source="/Resources/Icons/audio.png" Width="16" Height="16"/>
+                    <TextBlock Text="{Binding AudioLevel}" FontSize="10"/>
+                </StackPanel>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <Slider Width="100" Value="{Binding AudioVolume}" Maximum="100"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <!-- WiFi Control -->
+            <Button x:Name="WifiButton" Width="40" Height="40" Margin="2,0">
+                <Image Source="{Binding WifiIcon}" Width="20" Height="20"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel Width="200">
+                            <TextBlock Text="Available Networks" FontWeight="Bold"/>
+                            <ItemsControl ItemsSource="{Binding WifiNetworks}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding SignalStrength}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <!-- Language Selector -->
+            <Button x:Name="LanguageButton" Width="40" Height="40" Margin="2,0">
+                <TextBlock Text="{Binding CurrentLanguage}" FontSize="14"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <ListBox ItemsSource="{Binding AvailableLanguages}"
+                                 SelectedItem="{Binding CurrentLanguage}"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <!-- Battery Status -->
+            <Button x:Name="BatteryButton" Width="40" Height="40" Margin="2,0">
+                <StackPanel>
+                    <Image Source="{Binding BatteryIcon}" Width="20" Height="20"/>
+                    <TextBlock Text="{Binding BatteryPercentage}" FontSize="10"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Date and Time -->
+            <Button x:Name="DateTimeButton" Width="Auto" MinWidth="80" Height="40" Margin="2,0">
+                <StackPanel>
+                    <TextBlock Text="{Binding CurrentTime}" FontSize="12"/>
+                    <TextBlock Text="{Binding CurrentDate}" FontSize="10"/>
+                </StackPanel>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <Calendar SelectedDate="{Binding CurrentDate}"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <!-- Notification Center -->
+            <Button x:Name="NotificationButton" Width="40" Height="40" Margin="2,0">
+                <Grid>
+                    <Image Source="/Resources/Icons/notification.png" Width="20" Height="20"/>
+                    <Border Background="Red" Width="12" Height="12" 
+                            CornerRadius="6" HorizontalAlignment="Right" 
+                            VerticalAlignment="Top" Margin="0,-2,-2,0"
+                            Visibility="{Binding HasNotifications}">
+                        <TextBlock Text="{Binding NotificationCount}" 
+                                   Foreground="White" 
+                                   FontSize="8" 
+                                   HorizontalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </Button>
+
+            <!-- Action Center -->
+            <Button x:Name="ActionCenterButton" Width="40" Height="40" Margin="2,0">
+                <Image Source="/Resources/Icons/action-center.png" Width="20" Height="20"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#20FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#40FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+</UserControl>
