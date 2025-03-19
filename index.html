@@ -48,7 +48,7 @@
 
         @keyframes blastEffect {
             to {
-                transform: scale(0.2);
+                transform: scale(0.3);
                 opacity: 0;
             }
         }
@@ -287,6 +287,18 @@
 
         disagreeBtn.addEventListener('click', () => {
             window.location.href = 'https://www.google.com'; // Redirect if user disagrees
+        });
+
+        // Scroll reveal animation
+        const sections = document.querySelectorAll('.scroll-section');
+        window.addEventListener('scroll', () => {
+            sections.forEach(section => {
+                if (section.getBoundingClientRect().top <= window.innerHeight && !section.classList.contains('visible')) {
+                    section.classList.add('visible');
+                    section.style.opacity = 1;
+                    section.style.transform = 'translateY(0)';
+                }
+            });
         });
     </script>
 </body>
